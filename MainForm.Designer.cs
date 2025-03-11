@@ -1,6 +1,6 @@
 ﻿namespace Программа_для_взлома_шифра_Цезаря
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
@@ -56,6 +56,7 @@
             this.input_textBox.Name = "input_textBox";
             this.input_textBox.Size = new System.Drawing.Size(775, 155);
             this.input_textBox.TabIndex = 1;
+            this.input_textBox.TextChanged += new System.EventHandler(this.input_textBox_TextChanged);
             // 
             // key_numericUpDown
             // 
@@ -68,6 +69,7 @@
             this.key_numericUpDown.Name = "key_numericUpDown";
             this.key_numericUpDown.Size = new System.Drawing.Size(40, 20);
             this.key_numericUpDown.TabIndex = 2;
+            this.key_numericUpDown.ValueChanged += new System.EventHandler(this.key_numericUpDown_ValueChanged);
             // 
             // key_label
             // 
@@ -80,6 +82,7 @@
             // 
             // Type_of_operation_comboBox
             // 
+            this.Type_of_operation_comboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.Type_of_operation_comboBox.FormattingEnabled = true;
             this.Type_of_operation_comboBox.Items.AddRange(new object[] {
             "Дешифровать",
@@ -88,6 +91,7 @@
             this.Type_of_operation_comboBox.Name = "Type_of_operation_comboBox";
             this.Type_of_operation_comboBox.Size = new System.Drawing.Size(95, 21);
             this.Type_of_operation_comboBox.TabIndex = 4;
+            this.Type_of_operation_comboBox.SelectedIndexChanged += new System.EventHandler(this.Type_of_operation_comboBox_SelectedIndexChanged);
             // 
             // Type_of_operation_label
             // 
@@ -106,6 +110,7 @@
             this.start_button.TabIndex = 6;
             this.start_button.Text = "Выполнить";
             this.start_button.UseVisualStyleBackColor = true;
+            this.start_button.Click += new System.EventHandler(this.start_button_Click);
             // 
             // output_textBox
             // 
@@ -125,7 +130,7 @@
             this.output_label.TabIndex = 7;
             this.output_label.Text = "Результат:";
             // 
-            // Form1
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -139,8 +144,9 @@
             this.Controls.Add(this.key_numericUpDown);
             this.Controls.Add(this.input_textBox);
             this.Controls.Add(this.input_label);
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "Программа для взлома шифра Цезаря";
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.key_numericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
