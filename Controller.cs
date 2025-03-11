@@ -42,10 +42,10 @@ namespace Программа_для_взлома_шифра_Цезаря
                 this.OutputText = algorithm.EncryptText(this.InputText, this.Key);
             }
         }
-        public void ReadFromFile(string path)
+        public void ReadFromFile(string text)
         {
-            //read from file using path
-            this.InputText = "Todo: text from file";
+            //read text from file 
+            this.InputText = text;
             this.OutputText = string.Empty;
 
         }

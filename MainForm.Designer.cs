@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.input_label = new System.Windows.Forms.Label();
             this.input_textBox = new System.Windows.Forms.TextBox();
             this.key_numericUpDown = new System.Windows.Forms.NumericUpDown();
@@ -37,6 +38,8 @@
             this.start_button = new System.Windows.Forms.Button();
             this.output_textBox = new System.Windows.Forms.TextBox();
             this.output_label = new System.Windows.Forms.Label();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.Open_File_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.key_numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -130,11 +133,26 @@
             this.output_label.TabIndex = 7;
             this.output_label.Text = "Результат:";
             // 
+            // openFileDialog
+            // 
+            this.openFileDialog.FileName = "openFileDialog1";
+            // 
+            // Open_File_button
+            // 
+            this.Open_File_button.Location = new System.Drawing.Point(195, 208);
+            this.Open_File_button.Name = "Open_File_button";
+            this.Open_File_button.Size = new System.Drawing.Size(90, 23);
+            this.Open_File_button.TabIndex = 9;
+            this.Open_File_button.Text = "Открыть файл";
+            this.Open_File_button.UseVisualStyleBackColor = true;
+            this.Open_File_button.Click += new System.EventHandler(this.Open_File_button_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.Open_File_button);
             this.Controls.Add(this.output_textBox);
             this.Controls.Add(this.output_label);
             this.Controls.Add(this.start_button);
@@ -144,6 +162,7 @@
             this.Controls.Add(this.key_numericUpDown);
             this.Controls.Add(this.input_textBox);
             this.Controls.Add(this.input_label);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Программа для взлома шифра Цезаря";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -164,6 +183,8 @@
         private System.Windows.Forms.Button start_button;
         private System.Windows.Forms.TextBox output_textBox;
         private System.Windows.Forms.Label output_label;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
+        private System.Windows.Forms.Button Open_File_button;
     }
 }
 

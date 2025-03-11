@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Программа_для_взлома_шифра_Цезаря
 {
@@ -16,6 +17,7 @@ namespace Программа_для_взлома_шифра_Цезаря
         public MainForm()
         {
             InitializeComponent();
+            openFileDialog.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
@@ -54,5 +56,13 @@ namespace Программа_для_взлома_шифра_Цезаря
             BindControls();
         }
 
+        private void Open_File_button_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == DialogResult.Cancel) return;
+            string filename = openFileDialog.FileName;                          // получаем выбранный файл
+            string fileText = System.IO.File.ReadAllText(filename);             // читаем файл в строку
+            controller.ReadFromFile(fileText);
+            BindControls();
+        }
     }
 }
