@@ -18,16 +18,21 @@ namespace Программа_для_взлома_шифра_Цезаря
         {
             InitializeComponent();
             openFileDialog.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
+
         }
         private void MainForm_Load(object sender, EventArgs e)
         {
             controller = new Controller();
+            controller.LoadDictionary();
             BindControls();
         }
 
         private void BindControls()
         {
+            this.key_numericUpDown.Value = controller.Key;
             this.Type_of_operation_comboBox.SelectedIndex = controller.Mode == Mode.Decrypt ? 0 : 1;
+            this.progressBar.Value = 0;
+            this.progressBar.Visible = controller.Mode == Mode.Decrypt;
             this.input_textBox.Text = controller.InputText;
             this.output_textBox.Text = controller.OutputText;
         }
@@ -41,18 +46,26 @@ namespace Программа_для_взлома_шифра_Цезаря
         private void Type_of_operation_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             controller.SetMode(Type_of_operation_comboBox.SelectedIndex == 1 ? Mode.Encrypt : Mode.Decrypt);
+            if (this.Type_of_operation_comboBox.SelectedIndex == 1) key_numericUpDown.Enabled = true;           //
+            else { key_numericUpDown.Enabled = false; key_numericUpDown.Value = 0; };                           //
             BindControls();
         }
 
         private void key_numericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            controller.SetKey(Convert.ToInt32(key_numericUpDown.Value));
+            int key = Convert.ToInt32(key_numericUpDown.Value);
+            if (controller.Key != key)
+                controller.SetKey(key);
             BindControls();
         }
 
         private void start_button_Click(object sender, EventArgs e)
         {
-            controller.Do();
+            progressBar.Value = 0;
+            controller.Do((progress) =>
+            {
+                progressBar.Value = progress;
+            });
             BindControls();
         }
 

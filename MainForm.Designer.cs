@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.input_label = new System.Windows.Forms.Label();
             this.input_textBox = new System.Windows.Forms.TextBox();
-            this.key_numericUpDown = new System.Windows.Forms.NumericUpDown();
-            this.key_label = new System.Windows.Forms.Label();
             this.Type_of_operation_comboBox = new System.Windows.Forms.ComboBox();
             this.Type_of_operation_label = new System.Windows.Forms.Label();
             this.start_button = new System.Windows.Forms.Button();
@@ -40,6 +38,9 @@
             this.output_label = new System.Windows.Forms.Label();
             this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.Open_File_button = new System.Windows.Forms.Button();
+            this.key_label = new System.Windows.Forms.Label();
+            this.key_numericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
             ((System.ComponentModel.ISupportInitialize)(this.key_numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -54,34 +55,14 @@
             // 
             // input_textBox
             // 
+            this.input_textBox.BackColor = System.Drawing.SystemColors.Control;
             this.input_textBox.Location = new System.Drawing.Point(13, 30);
             this.input_textBox.Multiline = true;
             this.input_textBox.Name = "input_textBox";
+            this.input_textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.input_textBox.Size = new System.Drawing.Size(775, 155);
             this.input_textBox.TabIndex = 1;
             this.input_textBox.TextChanged += new System.EventHandler(this.input_textBox_TextChanged);
-            // 
-            // key_numericUpDown
-            // 
-            this.key_numericUpDown.Location = new System.Drawing.Point(13, 208);
-            this.key_numericUpDown.Maximum = new decimal(new int[] {
-            33,
-            0,
-            0,
-            0});
-            this.key_numericUpDown.Name = "key_numericUpDown";
-            this.key_numericUpDown.Size = new System.Drawing.Size(40, 20);
-            this.key_numericUpDown.TabIndex = 2;
-            this.key_numericUpDown.ValueChanged += new System.EventHandler(this.key_numericUpDown_ValueChanged);
-            // 
-            // key_label
-            // 
-            this.key_label.AutoSize = true;
-            this.key_label.Location = new System.Drawing.Point(13, 192);
-            this.key_label.Name = "key_label";
-            this.key_label.Size = new System.Drawing.Size(36, 13);
-            this.key_label.TabIndex = 3;
-            this.key_label.Text = "Ключ:";
             // 
             // Type_of_operation_comboBox
             // 
@@ -121,6 +102,7 @@
             this.output_textBox.Multiline = true;
             this.output_textBox.Name = "output_textBox";
             this.output_textBox.ReadOnly = true;
+            this.output_textBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.output_textBox.Size = new System.Drawing.Size(775, 155);
             this.output_textBox.TabIndex = 8;
             // 
@@ -147,11 +129,44 @@
             this.Open_File_button.UseVisualStyleBackColor = true;
             this.Open_File_button.Click += new System.EventHandler(this.Open_File_button_Click);
             // 
+            // key_label
+            // 
+            this.key_label.AutoSize = true;
+            this.key_label.Location = new System.Drawing.Point(13, 192);
+            this.key_label.Name = "key_label";
+            this.key_label.Size = new System.Drawing.Size(36, 13);
+            this.key_label.TabIndex = 3;
+            this.key_label.Text = "Ключ:";
+            // 
+            // key_numericUpDown
+            // 
+            this.key_numericUpDown.Enabled = false;
+            this.key_numericUpDown.Location = new System.Drawing.Point(13, 208);
+            this.key_numericUpDown.Maximum = new decimal(new int[] {
+            33,
+            0,
+            0,
+            0});
+            this.key_numericUpDown.Name = "key_numericUpDown";
+            this.key_numericUpDown.Size = new System.Drawing.Size(40, 20);
+            this.key_numericUpDown.TabIndex = 2;
+            this.key_numericUpDown.ValueChanged += new System.EventHandler(this.key_numericUpDown_ValueChanged);
+            // 
+            // progressBar
+            // 
+            this.progressBar.Location = new System.Drawing.Point(94, 236);
+            this.progressBar.Maximum = 33;
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(693, 21);
+            this.progressBar.Step = 1;
+            this.progressBar.TabIndex = 10;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.Open_File_button);
             this.Controls.Add(this.output_textBox);
             this.Controls.Add(this.output_label);
@@ -176,8 +191,6 @@
 
         private System.Windows.Forms.Label input_label;
         private System.Windows.Forms.TextBox input_textBox;
-        private System.Windows.Forms.NumericUpDown key_numericUpDown;
-        private System.Windows.Forms.Label key_label;
         private System.Windows.Forms.ComboBox Type_of_operation_comboBox;
         private System.Windows.Forms.Label Type_of_operation_label;
         private System.Windows.Forms.Button start_button;
@@ -185,6 +198,9 @@
         private System.Windows.Forms.Label output_label;
         private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.Button Open_File_button;
+        private System.Windows.Forms.Label key_label;
+        internal System.Windows.Forms.NumericUpDown key_numericUpDown;
+        private System.Windows.Forms.ProgressBar progressBar;
     }
 }
 

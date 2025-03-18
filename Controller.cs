@@ -15,6 +15,11 @@ namespace Программа_для_взлома_шифра_Цезаря
     internal class Controller
     {
         private string inputText;
+        private HashSet<string> dictionary { get; set; }
+        public Controller()
+        {
+            dictionary = new HashSet<string>();
+        }
         public string InputText
         {
             get => inputText;
@@ -28,13 +33,20 @@ namespace Программа_для_взлома_шифра_Цезаря
         public int Key { get; private set; }
         public Mode Mode { get; private set; }
 
-        public void Do()
+        public void LoadDictionary()
         {
+            dictionary = System.IO.File.ReadLines("Словарь(90т.слов).txt").ToHashSet();
+        }
+        public void Do(Action<int> proggressCallback)
+        {
+
         Algorithm algorithm = new Algorithm();
             if (this.Mode == Mode.Decrypt)
             {
                 //using Caesar cipher to decrypt
-                this.OutputText = algorithm.DecryptText(this.InputText, this.Key);
+                var (output, key) = algorithm.DecryptText(this.InputText, dictionary, proggressCallback);
+                this.Key = key;
+                this.OutputText = output;
             }
             else
             {
