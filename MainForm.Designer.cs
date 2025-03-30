@@ -41,6 +41,8 @@
             this.key_label = new System.Windows.Forms.Label();
             this.key_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.Save_File_button = new System.Windows.Forms.Button();
+            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.key_numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
@@ -121,7 +123,7 @@
             // 
             // Open_File_button
             // 
-            this.Open_File_button.Location = new System.Drawing.Point(195, 208);
+            this.Open_File_button.Location = new System.Drawing.Point(195, 207);
             this.Open_File_button.Name = "Open_File_button";
             this.Open_File_button.Size = new System.Drawing.Size(90, 23);
             this.Open_File_button.TabIndex = 9;
@@ -161,11 +163,22 @@
             this.progressBar.Step = 1;
             this.progressBar.TabIndex = 10;
             // 
+            // Save_File_button
+            // 
+            this.Save_File_button.Location = new System.Drawing.Point(12, 445);
+            this.Save_File_button.Name = "Save_File_button";
+            this.Save_File_button.Size = new System.Drawing.Size(75, 23);
+            this.Save_File_button.TabIndex = 11;
+            this.Save_File_button.Text = "Сохранить";
+            this.Save_File_button.UseVisualStyleBackColor = true;
+            this.Save_File_button.Click += new System.EventHandler(this.Save_File_button_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(800, 481);
+            this.Controls.Add(this.Save_File_button);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.Open_File_button);
             this.Controls.Add(this.output_textBox);
@@ -178,6 +191,8 @@
             this.Controls.Add(this.input_textBox);
             this.Controls.Add(this.input_label);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximumSize = new System.Drawing.Size(816, 520);
+            this.MinimumSize = new System.Drawing.Size(816, 520);
             this.Name = "MainForm";
             this.Text = "Программа для взлома шифра Цезаря";
             this.Load += new System.EventHandler(this.MainForm_Load);
@@ -201,6 +216,8 @@
         private System.Windows.Forms.Label key_label;
         internal System.Windows.Forms.NumericUpDown key_numericUpDown;
         private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.Button Save_File_button;
+        private System.Windows.Forms.SaveFileDialog saveFileDialog;
     }
 }
 

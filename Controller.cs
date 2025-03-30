@@ -35,7 +35,7 @@ namespace Программа_для_взлома_шифра_Цезаря
 
         public void LoadDictionary()
         {
-            dictionary = System.IO.File.ReadLines("Словарь(90т.слов).txt").ToHashSet();
+            dictionary = File.ReadLines("Словарь(90т.слов).txt").ToHashSet();
         }
         public void Do(Action<int> proggressCallback)
         {
@@ -51,7 +51,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             else
             {
                 //using Caesar cipher to encrypt
-                this.OutputText = algorithm.EncryptText(this.InputText, this.Key);
+                this.OutputText = algorithm.EncryptText(this.InputText, this.Key, proggressCallback);
             }
         }
         public void ReadFromFile(string text)

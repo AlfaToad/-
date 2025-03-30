@@ -25,7 +25,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             while (splitedText.Length > 0)
             {
                 string maxWord = MaxWord(splitedText);
-                if (dictionary.Contains(maxWord))
+                if (dictionary.Contains(maxWord.ToLower())) //added .ToLower()
                 {
                     return true;
                 }
@@ -76,7 +76,7 @@ namespace Программа_для_взлома_шифра_Цезаря
 
             proggressCallback(0);
             //file acsess for debuging
-            using (StreamWriter writer = new StreamWriter("C:\\Users\\Serega\\Desktop\\РПМ\\Курсач\\Код\\chanses.txt", false))
+            using (StreamWriter writer = new StreamWriter("chanses.txt", false))
             {
                 for (int j = 1; j < 34; j++)
                 {
@@ -135,8 +135,9 @@ namespace Программа_для_взлома_шифра_Цезаря
             }
             return output;
         }
-        public string EncryptText(string input, int key)
+        public string EncryptText(string input, int key, Action<int> proggressCallback)
         {
+            proggressCallback(0); //added progress bar
             string output = "";
             for (int i = 0; i < input.Length; i++)
             {
@@ -152,7 +153,9 @@ namespace Программа_для_взлома_шифра_Цезаря
                 {
                     output += input[i];
                 }
+                proggressCallback(i);   //added progress bar
             }
+            proggressCallback(input.Length);    //added progress bar
             return output;
         }
     }
