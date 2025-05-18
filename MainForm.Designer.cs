@@ -43,7 +43,14 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.Save_File_button = new System.Windows.Forms.Button();
             this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+            this.Clear_Input_button = new System.Windows.Forms.Button();
+            this.Clear_output_button = new System.Windows.Forms.Button();
+            this.panel = new System.Windows.Forms.Panel();
+            this.With_radioButton = new System.Windows.Forms.RadioButton();
+            this.Without_radioButton = new System.Windows.Forms.RadioButton();
+            this.Key_display_label = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.key_numericUpDown)).BeginInit();
+            this.panel.SuspendLayout();
             this.SuspendLayout();
             // 
             // input_label
@@ -142,7 +149,6 @@
             // 
             // key_numericUpDown
             // 
-            this.key_numericUpDown.Enabled = false;
             this.key_numericUpDown.Location = new System.Drawing.Point(13, 208);
             this.key_numericUpDown.Maximum = new decimal(new int[] {
             33,
@@ -173,11 +179,76 @@
             this.Save_File_button.UseVisualStyleBackColor = true;
             this.Save_File_button.Click += new System.EventHandler(this.Save_File_button_Click);
             // 
+            // Clear_Input_button
+            // 
+            this.Clear_Input_button.Location = new System.Drawing.Point(698, 192);
+            this.Clear_Input_button.Name = "Clear_Input_button";
+            this.Clear_Input_button.Size = new System.Drawing.Size(90, 23);
+            this.Clear_Input_button.TabIndex = 12;
+            this.Clear_Input_button.Text = "Очистить";
+            this.Clear_Input_button.UseVisualStyleBackColor = true;
+            this.Clear_Input_button.Click += new System.EventHandler(this.Clear_Input_button_Click);
+            // 
+            // Clear_output_button
+            // 
+            this.Clear_output_button.Location = new System.Drawing.Point(697, 446);
+            this.Clear_output_button.Name = "Clear_output_button";
+            this.Clear_output_button.Size = new System.Drawing.Size(90, 23);
+            this.Clear_output_button.TabIndex = 13;
+            this.Clear_output_button.Text = "Очистить";
+            this.Clear_output_button.UseVisualStyleBackColor = true;
+            this.Clear_output_button.Click += new System.EventHandler(this.Clear_output_button_Click);
+            // 
+            // panel
+            // 
+            this.panel.Controls.Add(this.With_radioButton);
+            this.panel.Controls.Add(this.Without_radioButton);
+            this.panel.Location = new System.Drawing.Point(64, 208);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(160, 23);
+            this.panel.TabIndex = 14;
+            this.panel.Visible = false;
+            // 
+            // With_radioButton
+            // 
+            this.With_radioButton.AutoSize = true;
+            this.With_radioButton.Location = new System.Drawing.Point(3, 3);
+            this.With_radioButton.Name = "With_radioButton";
+            this.With_radioButton.Size = new System.Drawing.Size(74, 17);
+            this.With_radioButton.TabIndex = 0;
+            this.With_radioButton.Text = "С ключом";
+            this.With_radioButton.UseVisualStyleBackColor = true;
+            this.With_radioButton.CheckedChanged += new System.EventHandler(this.With_radioButton_CheckedChanged);
+            // 
+            // Without_radioButton
+            // 
+            this.Without_radioButton.AutoSize = true;
+            this.Without_radioButton.Checked = true;
+            this.Without_radioButton.Location = new System.Drawing.Point(80, 3);
+            this.Without_radioButton.Name = "Without_radioButton";
+            this.Without_radioButton.Size = new System.Drawing.Size(78, 17);
+            this.Without_radioButton.TabIndex = 1;
+            this.Without_radioButton.TabStop = true;
+            this.Without_radioButton.Text = "Без ключа";
+            this.Without_radioButton.UseVisualStyleBackColor = true;
+            this.Without_radioButton.CheckedChanged += new System.EventHandler(this.Without_radioButton_CheckedChanged);
+            // 
+            // Key_display_label
+            // 
+            this.Key_display_label.AutoSize = true;
+            this.Key_display_label.Location = new System.Drawing.Point(13, 210);
+            this.Key_display_label.Name = "Key_display_label";
+            this.Key_display_label.Size = new System.Drawing.Size(13, 13);
+            this.Key_display_label.TabIndex = 2;
+            this.Key_display_label.Text = "0";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 481);
+            this.Controls.Add(this.Clear_output_button);
+            this.Controls.Add(this.Clear_Input_button);
             this.Controls.Add(this.Save_File_button);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.Open_File_button);
@@ -190,6 +261,8 @@
             this.Controls.Add(this.key_numericUpDown);
             this.Controls.Add(this.input_textBox);
             this.Controls.Add(this.input_label);
+            this.Controls.Add(this.Key_display_label);
+            this.Controls.Add(this.panel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(816, 520);
             this.MinimumSize = new System.Drawing.Size(816, 520);
@@ -197,6 +270,8 @@
             this.Text = "Программа для взлома шифра Цезаря";
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.key_numericUpDown)).EndInit();
+            this.panel.ResumeLayout(false);
+            this.panel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -218,6 +293,12 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.Button Save_File_button;
         private System.Windows.Forms.SaveFileDialog saveFileDialog;
+        private System.Windows.Forms.Button Clear_Input_button;
+        private System.Windows.Forms.Button Clear_output_button;
+        private System.Windows.Forms.Panel panel;
+        private System.Windows.Forms.RadioButton Without_radioButton;
+        private System.Windows.Forms.RadioButton With_radioButton;
+        private System.Windows.Forms.Label Key_display_label;
     }
 }
 

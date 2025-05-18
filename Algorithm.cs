@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.IO;
 
 
@@ -13,7 +10,7 @@ namespace Программа_для_взлома_шифра_Цезаря
     {
         const string alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
         const string alphabetUp = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-        private bool CheckingTranslation(string outputText, HashSet<string> dictionary)
+        private bool CheckingTranslation(string outputText, HashSet<string> dictionary) //Метод проверки корректности перевода по словарю
         {
             var charsToRemove = new string[] { "(", ")", "[", "]", "\'", "\"", "<", ">" };
             foreach (var c in charsToRemove)
@@ -38,7 +35,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             return false;
 
         }
-        public string MaxWord(string[] text)
+        public string MaxWord(string[] text) //Поиск слова с максимальной длинной 
         {
             string max = "";
             for (int i = 0; i < text.Length; i++)
@@ -48,12 +45,12 @@ namespace Программа_для_взлома_шифра_Цезаря
             return max;
         }
 
-        public (string output, int key) DecryptText(string input, HashSet<string> dictionary, Action<int> proggressCallback)
+        public (string output, int key) DecryptText(string input, HashSet<string> dictionary, Action<int> proggressCallback) //Сложный метод дешифровки шифра цезаря без известного ключа
         {
             Dictionary<int, (double delta, string output)> deltas = new Dictionary<int, (double delta, string output)>(); //using tuple
 
             string output;
-            var lettersChansePattern = new Dictionary<string, double>()
+            var lettersChansePattern = new Dictionary<string, double>() //Константные частоты для каждой буквы
             {
                 {"а", 0.07998},{"б", 0.01592},{"в", 0.04533},{"г", 0.01687},{"д", 0.02977},
                 {"е", 0.08483},{"ё", 0.00013},{"ж", 0.0094},{"з", 0.01641},{"и", 0.07367},
@@ -63,7 +60,7 @@ namespace Программа_для_взлома_шифра_Цезаря
                 {"ш", 0.00718},{"щ", 0.00361},{"ъ", 0.00037},{"ы", 0.01898},{"ь", 0.01735},
                 {"э", 0.00331},{"ю", 0.00639},{"я", 0.02001}
             };
-            var lettersChanse = new Dictionary<string, double>()
+            var lettersChanse = new Dictionary<string, double>() //Словарь для подсчета частоты для каждой буквы
             {
                 {"а", 0},{"б", 0},{"в", 0},{"г", 0},{"д", 0},
                 {"е", 0},{"ё", 0},{"ж", 0},{"з", 0},{"и", 0},
@@ -101,7 +98,7 @@ namespace Программа_для_взлома_шифра_Цезаря
                     deltas.Add(j, (delta, output));
                     proggressCallback(j);
                     //debug code 
-                    writer.WriteLine($"delta = {delta}"); 
+                    writer.WriteLine($"key = {j} \tdelta = {delta}"); 
                     writer.WriteLine($"//////////////////////////////////////////////////////////////////////////");
                 }
             }
@@ -115,7 +112,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             return (minItem.Value.output, minItem.Key);
         }
 
-        public string DecryptText(string input, int key)
+        public string DecryptText(string input, int key) //Базовый метод дешифровки с известным ключем
         {
             string output = "";
             for (int i = 0; i < input.Length; i++)
@@ -135,7 +132,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             }
             return output;
         }
-        public string EncryptText(string input, int key, Action<int> proggressCallback)
+        public string EncryptText(string input, int key, Action<int> proggressCallback) //Метод шифрования
         {
             proggressCallback(0); //added progress bar
             string output = "";
