@@ -12,8 +12,9 @@ namespace Программа_для_взлома_шифра_Цезаря
         public MainForm()
         {
             InitializeComponent();
-            openFileDialog.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
-            saveFileDialog.Filter = "txt files (*.txt)|*.txt|All files (*.*)|*.*";
+            openFileDialog.Filter = "txt files(*.txt)|*.txt";
+            openFileDialog.FileName = String.Empty;
+            saveFileDialog.Filter = "txt files(*.txt)|*.txt";
             saveFileDialog.FilterIndex = 2;
             saveFileDialog.RestoreDirectory = true;
 
@@ -139,6 +140,11 @@ namespace Программа_для_взлома_шифра_Цезаря
         {
             key_numericUpDown.Visible = false;
             controller.SetDecryptionMode(DecryptionMode.Without);
+        }
+
+        private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
         }
     }
 }

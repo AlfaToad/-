@@ -268,6 +268,7 @@
             this.MinimumSize = new System.Drawing.Size(816, 520);
             this.Name = "MainForm";
             this.Text = "Программа для взлома шифра Цезаря";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MainForm_FormClosed);
             this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.key_numericUpDown)).EndInit();
             this.panel.ResumeLayout(false);

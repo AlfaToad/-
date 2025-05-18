@@ -16,7 +16,7 @@ namespace Программа_для_взлома_шифра_Цезаря
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainForm());
+            Application.Run(new StartForm());
         }
     }
 }
