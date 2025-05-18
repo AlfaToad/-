@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -19,7 +18,6 @@ namespace Программа_для_взлома_шифра_Цезаря
             saveFileDialog.RestoreDirectory = true;
 
         }
-        private bool flag = true;
         private void MainForm_Load(object sender, EventArgs e)
         {
             controller = new Controller();
@@ -30,7 +28,6 @@ namespace Программа_для_взлома_шифра_Цезаря
         private void BindControls()
         {
             this.key_numericUpDown.Value = controller.Key;
-            this.Key_display_label.Text = controller.Key.ToString();
             this.Type_of_operation_comboBox.SelectedIndex = controller.Mode == Mode.Decrypt ? 0 : 1;
             this.progressBar.Value = 0;
             this.progressBar.Visible = false;
@@ -47,8 +44,8 @@ namespace Программа_для_взлома_шифра_Цезаря
         private void Type_of_operation_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             controller.SetMode(Type_of_operation_comboBox.SelectedIndex == 1 ? Mode.Encrypt : Mode.Decrypt);
-            if (this.Type_of_operation_comboBox.SelectedIndex == 1) { key_numericUpDown.Value = 0; key_numericUpDown.Visible = true; MoveControls(false); PanelView(false);  }
-            else { key_numericUpDown.Value = 0; key_numericUpDown.Visible = false; Without_radioButton.Checked = true; MoveControls(true); PanelView(true); };
+            if (this.Type_of_operation_comboBox.SelectedIndex == 1) { key_numericUpDown.Value = 0; }
+            else { key_numericUpDown.Value = 0; };
             BindControls();
         }
 
@@ -104,42 +101,6 @@ namespace Программа_для_взлома_шифра_Цезаря
         {
             controller.ClearInput();
             BindControls();
-        }
-        public void PanelView(bool display) 
-        {
-            panel.Visible = display;
-        }
-        public void MoveControls(bool forward)
-        {
-
-            if (forward && flag)
-            {
-                Type_of_operation_comboBox.Location = new Point(Type_of_operation_comboBox.Location.X + 160, Type_of_operation_comboBox.Location.Y);
-                Type_of_operation_label.Location = new Point(Type_of_operation_label.Location.X + 160, Type_of_operation_label.Location.Y);
-                Open_File_button.Location = new Point(Open_File_button.Location.X + 160, Open_File_button.Location.Y);
-                flag = false;
-            }
-            if (forward == false && flag == false)
-            {
-                Type_of_operation_comboBox.Location = new Point(Type_of_operation_comboBox.Location.X - 160, Type_of_operation_comboBox.Location.Y);
-                Type_of_operation_label.Location = new Point(Type_of_operation_label.Location.X - 160, Type_of_operation_label.Location.Y);
-                Open_File_button.Location = new Point(Open_File_button.Location.X - 160, Open_File_button.Location.Y);
-                flag = true;
-            }
-        }
-
-        private void With_radioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            key_numericUpDown.Visible = true;
-            controller.SetDecryptionMode(DecryptionMode.With);
-            controller.ClearOutput();
-            BindControls();
-        }
-
-        private void Without_radioButton_CheckedChanged(object sender, EventArgs e)
-        {
-            key_numericUpDown.Visible = false;
-            controller.SetDecryptionMode(DecryptionMode.Without);
         }
 
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)

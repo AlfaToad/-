@@ -10,11 +10,6 @@ namespace Программа_для_взлома_шифра_Цезаря
         Decrypt = 0,
         Encrypt
     };
-    public enum DecryptionMode //Варианты дешифровки
-    {
-        Without = 0,
-        With
-    };
 
     internal class Controller
     {
@@ -22,7 +17,7 @@ namespace Программа_для_взлома_шифра_Цезаря
         private HashSet<string> dictionary { get; set; } //Словарь 90т слов
         public Controller()
         {
-            dictionary = new HashSet<string>(); 
+            dictionary = new HashSet<string>();
         }
         public string InputText
         {
@@ -36,7 +31,6 @@ namespace Программа_для_взлома_шифра_Цезаря
         public string OutputText { get; private set; } //Текст получающийся в результате
         public int Key { get; private set; } //Ключ
         public Mode Mode { get; private set; } //Вариант действия
-        public DecryptionMode DecryptionMode { get; private set; } //Вариант дешифровки
 
         public void LoadDictionary() //Метод импорта словаря
         {
@@ -45,20 +39,11 @@ namespace Программа_для_взлома_шифра_Цезаря
         public void Do(Action<int> proggressCallback) //Метод выполнения действия при нажатии кнопки "Выполнить"
         {
 
-        Algorithm algorithm = new Algorithm();
+            Algorithm algorithm = new Algorithm();
             if (this.Mode == Mode.Decrypt) //using Caesar cipher to decrypt
             {
-                if (this.DecryptionMode == DecryptionMode.With) //with key
-                {
-                    string output = algorithm.DecryptText(this.InputText, this.Key);
-                    this.OutputText = output;
-                }
-                else //without key
-                {
-                    var (output, key) = algorithm.DecryptText(this.InputText, dictionary, proggressCallback);
-                    this.Key = key;
-                    this.OutputText = output;
-                }
+                string output = algorithm.DecryptText(this.InputText, this.Key);
+                this.OutputText = output;
             }
             else
             {
@@ -75,21 +60,17 @@ namespace Программа_для_взлома_шифра_Цезаря
         {
             this.Mode = mode;
         }
-        public void SetDecryptionMode(DecryptionMode DecryptionMode) //Метод реализующий установку варианта дешифровки
-        {
-            this.DecryptionMode = DecryptionMode;
-        }
         public void SetKey(int key) //Метод реализующий очистку текстового поля вывода при установке ключа
         {
             this.Key = key;
             this.OutputText = string.Empty;
         }
-        public void ClearInput() 
+        public void ClearInput()
         {
             this.Key = 0;
             this.InputText = string.Empty;
         }
-        public void ClearOutput() 
+        public void ClearOutput()
         {
             this.Key = 0;
             this.OutputText = string.Empty;
