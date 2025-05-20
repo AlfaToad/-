@@ -8,8 +8,8 @@ namespace Программа_для_взлома_шифра_Цезаря
 {
     internal class Algorithm
     {
-        const string alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-        const string alphabetUp = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+        private const string alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+        private const string alphabetUp = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
         private bool CheckingTranslation(string outputText, HashSet<string> dictionary) //Метод проверки корректности перевода по словарю
         {
             var charsToRemove = new string[] { "(", ")", "[", "]", "\'", "\"", "<", ">" };
@@ -22,7 +22,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             while (splitedText.Length > 0)
             {
                 string maxWord = MaxWord(splitedText);
-                if (dictionary.Contains(maxWord.ToLower())) //added .ToLower()
+                if (dictionary.Contains(maxWord.ToLower()))
                 {
                     return true;
                 }
@@ -35,7 +35,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             return false;
 
         }
-        public string MaxWord(string[] text) //Поиск слова с максимальной длинной 
+        private string MaxWord(string[] text) //Поиск слова с максимальной длинной 
         {
             string max = "";
             for (int i = 0; i < text.Length; i++)
@@ -47,7 +47,7 @@ namespace Программа_для_взлома_шифра_Цезаря
 
         public (string output, int key) DecryptText(string input, HashSet<string> dictionary, Action<int> proggressCallback) //Сложный метод дешифровки шифра цезаря без известного ключа
         {
-            Dictionary<int, (double delta, string output)> deltas = new Dictionary<int, (double delta, string output)>(); //using tuple
+            Dictionary<int, (double delta, string output)> deltas = new Dictionary<int, (double delta, string output)>(); //использую tuple
 
             string output;
             var lettersChansePattern = new Dictionary<string, double>() //Константные частоты для каждой буквы
@@ -72,7 +72,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             };
 
             proggressCallback(0);
-            //file acsess for debuging
+            //доступ к файлам для отладки
             using (StreamWriter writer = new StreamWriter("chanses.txt", false))
             {
                 for (int j = 1; j < 34; j++)
@@ -97,7 +97,7 @@ namespace Программа_для_взлома_шифра_Цезаря
                     }
                     deltas.Add(j, (delta, output));
                     proggressCallback(j);
-                    //debug code 
+                    //отладочный код 
                     writer.WriteLine($"key = {j} \tdelta = {delta}"); 
                     writer.WriteLine($"//////////////////////////////////////////////////////////////////////////");
                 }
@@ -112,7 +112,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             return (minItem.Value.output, minItem.Key);
         }
 
-        public string DecryptText(string input, int key) //Базовый метод дешифровки с известным ключем
+        public string DecryptText(string input, int key) //Базовый метод дешифровки с известным ключом
         {
             string output = "";
             for (int i = 0; i < input.Length; i++)
@@ -134,7 +134,7 @@ namespace Программа_для_взлома_шифра_Цезаря
         }
         public string EncryptText(string input, int key, Action<int> proggressCallback) //Метод шифрования
         {
-            proggressCallback(0); //added progress bar
+            proggressCallback(0); //добавлен индикатор выполнения
             string output = "";
             for (int i = 0; i < input.Length; i++)
             {
@@ -150,9 +150,9 @@ namespace Программа_для_взлома_шифра_Цезаря
                 {
                     output += input[i];
                 }
-                proggressCallback(i);   //added progress bar
+                proggressCallback(i);
             }
-            proggressCallback(input.Length);    //added progress bar
+            proggressCallback(input.Length);
             return output;
         }
     }

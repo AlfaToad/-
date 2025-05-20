@@ -18,7 +18,7 @@ namespace Программа_для_взлома_шифра_Цезаря
 
     internal class Controller
     {
-        private string inputText; //Входной текст 
+        private string inputText = ""; //Входной текст 
         private HashSet<string> dictionary { get; set; } //Словарь 90т слов
         public Controller()
         {
@@ -46,14 +46,14 @@ namespace Программа_для_взлома_шифра_Цезаря
         {
 
         Algorithm algorithm = new Algorithm();
-            if (this.Mode == Mode.Decrypt) //using Caesar cipher to decrypt
+            if (this.Mode == Mode.Decrypt) //использование шифра Цезаря для расшифровки
             {
-                if (this.DecryptionMode == DecryptionMode.With) //with key
+                if (this.DecryptionMode == DecryptionMode.With) //с ключом
                 {
                     string output = algorithm.DecryptText(this.InputText, this.Key);
                     this.OutputText = output;
                 }
-                else //without key
+                else //без ключа
                 {
                     var (output, key) = algorithm.DecryptText(this.InputText, dictionary, proggressCallback);
                     this.Key = key;
@@ -62,7 +62,7 @@ namespace Программа_для_взлома_шифра_Цезаря
             }
             else
             {
-                //using Caesar cipher to encrypt
+                //использование шифра Цезаря для шифрования
                 this.OutputText = algorithm.EncryptText(this.InputText, this.Key, proggressCallback);
             }
         }

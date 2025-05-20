@@ -49,6 +49,7 @@
             this.With_radioButton = new System.Windows.Forms.RadioButton();
             this.Without_radioButton = new System.Windows.Forms.RadioButton();
             this.Key_display_label = new System.Windows.Forms.Label();
+            this.info_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.key_numericUpDown)).BeginInit();
             this.panel.SuspendLayout();
             this.SuspendLayout();
@@ -242,11 +243,22 @@
             this.Key_display_label.TabIndex = 2;
             this.Key_display_label.Text = "0";
             // 
+            // info_button
+            // 
+            this.info_button.Location = new System.Drawing.Point(730, 3);
+            this.info_button.Name = "info_button";
+            this.info_button.Size = new System.Drawing.Size(58, 23);
+            this.info_button.TabIndex = 15;
+            this.info_button.Text = "Справка";
+            this.info_button.UseVisualStyleBackColor = true;
+            this.info_button.Click += new System.EventHandler(this.info_button_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 481);
+            this.Controls.Add(this.info_button);
             this.Controls.Add(this.Clear_output_button);
             this.Controls.Add(this.Clear_Input_button);
             this.Controls.Add(this.Save_File_button);
@@ -300,6 +312,7 @@
         private System.Windows.Forms.RadioButton Without_radioButton;
         private System.Windows.Forms.RadioButton With_radioButton;
         private System.Windows.Forms.Label Key_display_label;
+        private System.Windows.Forms.Button info_button;
     }
 }
 

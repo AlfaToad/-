@@ -36,6 +36,9 @@ namespace Программа_для_взлома_шифра_Цезаря
             this.progressBar.Visible = false;
             this.input_textBox.Text = controller.InputText;
             this.output_textBox.Text = controller.OutputText;
+            this.start_button.Enabled = !string.IsNullOrEmpty(controller.InputText);
+            this.Clear_Input_button.Enabled = !string.IsNullOrEmpty(controller.InputText);
+            this.Clear_output_button.Enabled = !string.IsNullOrEmpty(controller.OutputText);
         }
 
         private void input_textBox_TextChanged(object sender, EventArgs e)
@@ -47,7 +50,7 @@ namespace Программа_для_взлома_шифра_Цезаря
         private void Type_of_operation_comboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             controller.SetMode(Type_of_operation_comboBox.SelectedIndex == 1 ? Mode.Encrypt : Mode.Decrypt);
-            if (this.Type_of_operation_comboBox.SelectedIndex == 1) { key_numericUpDown.Value = 0; key_numericUpDown.Visible = true; MoveControls(false); PanelView(false);  }
+            if (this.Type_of_operation_comboBox.SelectedIndex == 1) { key_numericUpDown.Value = 0; key_numericUpDown.Visible = true; MoveControls(false); PanelView(false); }
             else { key_numericUpDown.Value = 0; key_numericUpDown.Visible = false; Without_radioButton.Checked = true; MoveControls(true); PanelView(true); };
             BindControls();
         }
@@ -63,25 +66,45 @@ namespace Программа_для_взлома_шифра_Цезаря
 
         private void start_button_Click(object sender, EventArgs e)
         {
+            SetupProgressBar();
+            DoAction();
+            BindControls();
+        }
+
+        private void DoAction()
+        {
+            controller.Do((progress) => { progressBar.Value = progress; });
+        }
+
+        private void SetupProgressBar()
+        {
             progressBar.Visible = true;
             progressBar.Value = 0;
             if (Type_of_operation_comboBox.Text == "Дешифровать")
             { progressBar.Maximum = 33; }
             else { progressBar.Maximum = input_textBox.Text.Length; }
-            controller.Do((progress) => { progressBar.Value = progress; });
-            BindControls();
         }
 
         private void Open_File_button_Click(object sender, EventArgs e)
+        {
+            LoadFromFile();
+            BindControls();
+        }
+
+        private void LoadFromFile()
         {
             if (openFileDialog.ShowDialog() == DialogResult.Cancel) return;
             string filename = openFileDialog.FileName;      // получаем выбранный файл
             string fileText = File.ReadAllText(filename);   // читаем файл в строку
             controller.ReadFromFile(fileText);
-            BindControls();
         }
 
         private void Save_File_button_Click(object sender, EventArgs e) //Сохранение результата действия 
+        {
+            SaveToFile();
+        }
+
+        private void SaveToFile()
         {
             string save_file_name = string.Join(" ", input_textBox.Text.Split().Take(1)) + "_"
                 + Type_of_operation_comboBox.Text + "_key=" + key_numericUpDown.Value + ".txt";
@@ -105,11 +128,11 @@ namespace Программа_для_взлома_шифра_Цезаря
             controller.ClearInput();
             BindControls();
         }
-        public void PanelView(bool display) 
+        private void PanelView(bool display)
         {
             panel.Visible = display;
         }
-        public void MoveControls(bool forward)
+        private void MoveControls(bool forward)
         {
 
             if (forward && flag)
@@ -145,6 +168,17 @@ namespace Программа_для_взлома_шифра_Цезаря
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void info_button_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Программа для взлома шифра Цезаря" +
+                "\nАвтор: AlfaToad" +
+                "\nРуководство к использованию:" +
+                "\n1.Введите текст в поле 'Исходный текст' или загрузите текст из файла" +
+                "\n2.Выберите нужное вам действие" +
+                "\n3.Нажмите на кнопку 'Выполнить'" +
+                "\n4.Сохраните результат нажав на кнопку 'Сохранить'");
         }
     }
 }
