@@ -6,8 +6,8 @@ namespace Программа_для_взлома_шифра_Цезаря
 {
     internal class Algorithm
     {
-        const string alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-        const string alphabetUp = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+        private const string alphabet = "абвгдеёжзийклмнопрстуфхцчшщъыьэюяабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+        private const string alphabetUp = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 
         public string DecryptText(string input, int key) //Базовый метод дешифровки с известным ключем
         {
@@ -31,7 +31,7 @@ namespace Программа_для_взлома_шифра_Цезаря
         }
         public string EncryptText(string input, int key, Action<int> proggressCallback) //Метод шифрования
         {
-            proggressCallback(0); //added progress bar
+            proggressCallback(0); //добавлен индикатор выполнения
             string output = "";
             for (int i = 0; i < input.Length; i++)
             {
@@ -47,9 +47,9 @@ namespace Программа_для_взлома_шифра_Цезаря
                 {
                     output += input[i];
                 }
-                proggressCallback(i);   //added progress bar
+                proggressCallback(i);
             }
-            proggressCallback(input.Length);    //added progress bar
+            proggressCallback(input.Length);
             return output;
         }
     }

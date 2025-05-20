@@ -33,6 +33,9 @@ namespace Программа_для_взлома_шифра_Цезаря
             this.progressBar.Visible = false;
             this.input_textBox.Text = controller.InputText;
             this.output_textBox.Text = controller.OutputText;
+            this.start_button.Enabled = !string.IsNullOrEmpty(controller.InputText);
+            this.Clear_Input_button.Enabled = !string.IsNullOrEmpty(controller.InputText);
+            this.Clear_output_button.Enabled = !string.IsNullOrEmpty(controller.OutputText);
         }
 
         private void input_textBox_TextChanged(object sender, EventArgs e)
@@ -106,6 +109,16 @@ namespace Программа_для_взлома_шифра_Цезаря
         private void MainForm_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+        private void info_button_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Программа для взлома шифра Цезаря" +
+                "\nАвтор: AlfaToad" +
+                "\nРуководство к использованию:" +
+                "\n1.Введите текст в поле 'Исходный текст' или загрузите текст из файла" +
+                "\n2.Выберите нужное вам действие" +
+                "\n3.Нажмите на кнопку 'Выполнить'" +
+                "\n4.Сохраните результат нажав на кнопку 'Сохранить'");
         }
     }
 }
